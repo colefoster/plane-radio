@@ -14,8 +14,8 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const PORT = process.env.PORT || 8000;
 
 // Receiver location (London CYXU) — used to query the online ADS-B API.
-const HOME_LAT = Number(process.env.HOME_LAT ?? 43.0356);
-const HOME_LON = Number(process.env.HOME_LON ?? -81.1539);
+const HOME_LAT = Number(process.env.HOME_LAT ?? 43.0356); // CYXU by default; set HOME_LAT to your own receiver
+const HOME_LON = Number(process.env.HOME_LON ?? -81.1539); // CYXU by default; set HOME_LON to your own receiver
 const MAP_DIST_NM = Number(process.env.MAP_DIST_NM ?? 100); // search radius
 const API_URL = `https://api.adsb.lol/v2/lat/${HOME_LAT}/lon/${HOME_LON}/dist/${MAP_DIST_NM}`;
 

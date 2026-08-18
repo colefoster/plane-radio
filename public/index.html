@@ -103,12 +103,17 @@ const $ = (s) => document.querySelector(s);
 const statusEl = $("#status");
 
 // ---- map ----
-const map = L.map("map", { zoomControl:true, attributionControl:false })
+const map = L.map("map", { zoomControl:true, attributionControl:true })
   .setView([43.0356, -81.1539], 9); // London CYXU; auto-fits to planes when they appear
 L.marker([43.0356, -81.1539], {
   icon: L.divIcon({ className:"", html:'<div style="font-size:18px">📍</div>', iconSize:[18,18], iconAnchor:[9,18] }),
 }).addTo(map).bindTooltip("CYXU — you", { permanent:false });
-L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", { maxZoom:18 }).addTo(map);
+// CARTO and OpenStreetMap both require visible attribution on the map itself —
+// their terms are not satisfied by a credit buried in the README.
+L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
+  maxZoom: 18,
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a> &middot; aircraft data <a href="https://adsb.lol/">adsb.lol</a>'
+}).addTo(map);
 
 const markers = new Map();
 let fitted = false;
